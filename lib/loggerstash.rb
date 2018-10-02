@@ -53,7 +53,9 @@ class Loggerstash
   def log_message(s, t, p, m)
     @op_mutex.synchronize do
       if @logstash_writer.nil?
+        #:nocov:
         run_writer
+        #:nocov:
       end
 
       @logstash_writer.send_event((@formatter || default_formatter).call(s, t, p, m))
@@ -63,8 +65,10 @@ class Loggerstash
 
   def run_writer
     unless @op_mutex.owned?
+      #:nocov:
       raise RuntimeError,
             "Must call run_writer while holding @op_mutex"
+      #:nocov:
     end
 
     if @logstash_writer.nil?
@@ -107,8 +111,10 @@ class Loggerstash
     def loggerstash
       ([self] + self.class.ancestors).find { |m| m.instance_variable_defined?(:@loggerstash) }.instance_variable_get(:@loggerstash).tap do |ls|
         if ls.nil?
+          #:nocov:
           raise RuntimeError,
                 "Cannot find loggerstash instance.  CAN'T HAPPEN."
+          #:nocov:
         end
       end
     end
