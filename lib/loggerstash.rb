@@ -34,11 +34,16 @@ class Loggerstash
   #   as the standard `Logger` formatter, but rather than emitting a string,
   #   it should pass back a Hash containing all the fields you wish to send
   #   to logstash.
+  # @param logstash_writer [LogstashWriter] in the event that you've already
+  #   got a LogstashWriter instance configured, you can pass it in here.  Note
+  #   that any values you've set for logstash_server and metrics_registry
+  #   will be ignored.
   #
-  def initialize(logstash_server:, metrics_registry: nil, formatter: nil)
+  def initialize(logstash_server:, metrics_registry: nil, formatter: nil, logstash_writer: nil)
     @logstash_server = logstash_server
     @metrics_registry = metrics_registry
     @formatter = formatter
+    @logstash_writer = logstash_writer
 
     @op_mutex = Mutex.new
   end
