@@ -137,7 +137,7 @@ class Loggerstash
     @default_formatter ||= ->(s, t, p, m) do
       {
         "@timestamp":  t.utc.strftime("%FT%T.%NZ"),
-        "@metadata":   { _type: "loggerstash" },
+        "@metadata":   { event_type: "loggerstash" },
         message:       m,
         severity_name: s.downcase,
         hostname:      Socket.gethostname,

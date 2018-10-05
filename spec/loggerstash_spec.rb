@@ -147,7 +147,7 @@ describe Loggerstash do
         .with(
           "@timestamp":  "2009-02-13T23:31:30.987654321Z",
           "@metadata":   {
-            _type: "loggerstash",
+            event_type: "loggerstash",
           },
           message:       "ohai",
           progname:      "asdf",
@@ -169,7 +169,7 @@ describe Loggerstash do
         .with(
           "@timestamp":  "2009-02-13T23:31:30.987654321Z",
           "@metadata":   {
-            _type: "loggerstash",
+            event_type: "loggerstash",
           },
           message:       "ohai",
           severity_name: "info",
