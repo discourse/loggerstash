@@ -146,6 +146,9 @@ describe Loggerstash do
         .to have_received(:send_event)
         .with(
           "@timestamp":  "2009-02-13T23:31:30.987654321Z",
+          "@metadata":   {
+            _type: "loggerstash",
+          },
           message:       "ohai",
           progname:      "asdf",
           severity_name: "info",
@@ -165,6 +168,9 @@ describe Loggerstash do
         .to have_received(:send_event)
         .with(
           "@timestamp":  "2009-02-13T23:31:30.987654321Z",
+          "@metadata":   {
+            _type: "loggerstash",
+          },
           message:       "ohai",
           severity_name: "info",
           pid:           kind_of(Numeric),
