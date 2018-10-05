@@ -136,7 +136,7 @@ describe Loggerstash do
 
   describe "logging" do
     it "writes a log event" do
-      allow(Time).to receive(:now).and_return(Time.at(1234567890.12345))
+      allow(Time).to receive(:now).and_return(Time.strptime("1234567890.987654321Z", "%s.%N%Z"))
       l = Logger.new("/dev/null")
       ls.attach(l)
 
@@ -145,15 +145,17 @@ describe Loggerstash do
       expect(mock_writer)
         .to have_received(:send_event)
         .with(
-          "@timestamp" => "2009-02-13T23:31:30.123450040Z",
-          message: "ohai",
-          progname: "asdf",
-          severity: "info",
+          "@timestamp":  "2009-02-13T23:31:30.987654321Z",
+          message:       "ohai",
+          progname:      "asdf",
+          severity_name: "info",
+          pid:           kind_of(Numeric),
+          hostname:      instance_of(String),
         )
     end
 
-    it "handles a lack of progname" do
-      allow(Time).to receive(:now).and_return(Time.at(1234567890.12345))
+    it "accepts a lack of progname" do
+      allow(Time).to receive(:now).and_return(Time.strptime("1234567890.987654321Z", "%s.%N%Z"))
       l = Logger.new("/dev/null")
       ls.attach(l)
 
@@ -162,13 +164,15 @@ describe Loggerstash do
       expect(mock_writer)
         .to have_received(:send_event)
         .with(
-          "@timestamp" => "2009-02-13T23:31:30.123450040Z",
-          message: "ohai",
-          severity: "info",
+          "@timestamp":  "2009-02-13T23:31:30.987654321Z",
+          message:       "ohai",
+          severity_name: "info",
+          pid:           kind_of(Numeric),
+          hostname:      instance_of(String),
         )
     end
 
-    it "forwards the message to the original I/O object" do
+    it "duplicates the message to the original I/O object" do
       l = Logger.new(sio = StringIO.new)
       ls.attach(l)
 

@@ -136,9 +136,11 @@ class Loggerstash
   def default_formatter
     @default_formatter ||= ->(s, t, p, m) do
       {
-        "@timestamp" => t.utc.strftime("%FT%T.%NZ"),
-        message: m,
-        severity: s.downcase,
+        "@timestamp":  t.utc.strftime("%FT%T.%NZ"),
+        message:       m,
+        severity_name: s.downcase,
+        hostname:      Socket.gethostname,
+        pid:           $$,
       }.tap do |ev|
         ev[:progname] = p if p
       end
