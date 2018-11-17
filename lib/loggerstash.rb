@@ -39,11 +39,12 @@ class Loggerstash
   #   that any values you've set for logstash_server and metrics_registry
   #   will be ignored.
   #
-  def initialize(logstash_server:, metrics_registry: nil, formatter: nil, logstash_writer: nil)
-    @logstash_server = logstash_server
+  def initialize(logstash_server:, metrics_registry: nil, formatter: nil, logstash_writer: nil, logger: nil)
+    @logstash_server  = logstash_server
     @metrics_registry = metrics_registry
-    @formatter = formatter
-    @logstash_writer = logstash_writer
+    @formatter        = formatter
+    @logstash_writer  = logstash_writer
+    @logger           = logger
 
     @op_mutex = Mutex.new
   end
@@ -122,6 +123,9 @@ class Loggerstash
         opts[:server_name] = @logstash_server
         if @metrics_registry
           opts[:metrics_registry] = @metrics_registry
+        end
+        if @logger
+          opts[:logger] = @logger
         end
 
         @logstash_writer = LogstashWriter.new(**opts)

@@ -38,6 +38,14 @@ describe Loggerstash do
 
       expect(mock_writer).to have_received(:send_event).with(a: "a", b: "b")
     end
+
+    it "accepts a logger" do
+      ls = Loggerstash.new(logstash_server: "speccy", logger: logger = Logger.new("/dev/null"))
+
+      expect(LogstashWriter).to receive(:new).with(server_name: "speccy", logger: logger)
+
+      ls.attach(logger)
+    end
   end
 
   describe "#attach" do
