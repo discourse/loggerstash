@@ -139,6 +139,8 @@ class Loggerstash
   #
   def default_formatter
     @default_formatter ||= ->(s, t, p, m) do
+      caller = caller_locations.find { |loc| ! [__FILE__, logger_filename].include? loc.absolute_path }
+
       {
         "@timestamp":  t.utc.strftime("%FT%T.%NZ"),
         "@metadata":   { event_type: "loggerstash" },
@@ -146,10 +148,23 @@ class Loggerstash
         severity_name: s.downcase,
         hostname:      Socket.gethostname,
         pid:           $$,
+        caller:        {
+          absolute_path: caller.absolute_path,
+          base_label:    caller.base_label,
+          label:         caller.label,
+          lineno:        caller.lineno,
+          path:          caller.path,
+        },
       }.tap do |ev|
         ev[:progname] = p if p
       end
     end
+  end
+
+  # Identify the absolute path of the file that defines the Logger class.
+  #
+  def logger_filename
+    @logger_filename ||= Logger.instance_method(:format_message).source_location.first
   end
 
   # The methods needed to turn any Logger into a Loggerstash Logger.

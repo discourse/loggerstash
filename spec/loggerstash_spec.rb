@@ -162,6 +162,13 @@ describe Loggerstash do
           severity_name: "info",
           pid:           kind_of(Numeric),
           hostname:      instance_of(String),
+          caller:        {
+            absolute_path: __FILE__,
+            base_label:    "<top (required)>",
+            label:         "block (3 levels) in <top (required)>",
+            lineno:        __LINE__ - 18,
+            path:          __FILE__,
+          },
         )
     end
 
@@ -183,6 +190,13 @@ describe Loggerstash do
           severity_name: "info",
           pid:           kind_of(Numeric),
           hostname:      instance_of(String),
+          caller:        {
+            absolute_path: __FILE__,
+            base_label:    "<top (required)>",
+            label:         "block (3 levels) in <top (required)>",
+            lineno:        __LINE__ - 17,
+            path:          __FILE__,
+          },
         )
     end
 
