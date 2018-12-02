@@ -111,6 +111,8 @@ Layout/MultilineMethodCallIndentation:
 
 Layout/AlignHash:
   Enabled: true
+  EnforcedHashRocketStyle: table
+  EnforcedColonStyle: table
 
 Bundler/OrderedGems:
   Enabled: false
