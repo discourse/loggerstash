@@ -142,18 +142,18 @@ class Loggerstash
       caller = caller_locations.find { |loc| ! [__FILE__, logger_filename].include? loc.absolute_path }
 
       {
-        "@timestamp":  t.utc.strftime("%FT%T.%NZ"),
-        "@metadata":   { event_type: "loggerstash" },
-        message:       m,
+        "@timestamp": t.utc.strftime("%FT%T.%NZ"),
+        "@metadata": { event_type: "loggerstash" },
+        message: m,
         severity_name: s.downcase,
-        hostname:      Socket.gethostname,
-        pid:           $$,
-        caller:        {
+        hostname: Socket.gethostname,
+        pid: $$,
+        caller: {
           absolute_path: caller.absolute_path,
-          base_label:    caller.base_label,
-          label:         caller.label,
-          lineno:        caller.lineno,
-          path:          caller.path,
+          base_label: caller.base_label,
+          label: caller.label,
+          lineno: caller.lineno,
+          path: caller.path,
         },
       }.tap do |ev|
         ev[:progname] = p if p
