@@ -153,21 +153,21 @@ describe Loggerstash do
       expect(mock_writer)
         .to have_received(:send_event)
         .with(
-          "@timestamp": "2009-02-13T23:31:30.987654321Z",
-          "@metadata": {
+          "@timestamp":  "2009-02-13T23:31:30.987654321Z",
+          "@metadata":   {
             event_type: "loggerstash",
           },
-          message: "ohai",
-          progname: "asdf",
+          message:       "ohai",
+          progname:      "asdf",
           severity_name: "info",
-          pid: kind_of(Numeric),
-          hostname: instance_of(String),
-          caller: {
+          pid:           kind_of(Numeric),
+          hostname:      instance_of(String),
+          caller:        {
             absolute_path: __FILE__,
-            base_label: "<top (required)>",
-            label: "block (3 levels) in <top (required)>",
-            lineno: __LINE__ - 18,
-            path: __FILE__,
+            base_label:    "<top (required)>",
+            label:         "block (3 levels) in <top (required)>",
+            lineno:        __LINE__ - 18,
+            path:          __FILE__,
           },
         )
     end
@@ -182,20 +182,20 @@ describe Loggerstash do
       expect(mock_writer)
         .to have_received(:send_event)
         .with(
-          "@timestamp": "2009-02-13T23:31:30.987654321Z",
-          "@metadata": {
+          "@timestamp":  "2009-02-13T23:31:30.987654321Z",
+          "@metadata":   {
             event_type: "loggerstash",
           },
-          message: "ohai",
+          message:       "ohai",
           severity_name: "info",
-          pid: kind_of(Numeric),
-          hostname: instance_of(String),
-          caller: {
+          pid:           kind_of(Numeric),
+          hostname:      instance_of(String),
+          caller:        {
             absolute_path: __FILE__,
-            base_label: "<top (required)>",
-            label: "block (3 levels) in <top (required)>",
-            lineno: __LINE__ - 17,
-            path: __FILE__,
+            base_label:    "<top (required)>",
+            label:         "block (3 levels) in <top (required)>",
+            lineno:        __LINE__ - 17,
+            path:          __FILE__,
           },
         )
     end
