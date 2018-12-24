@@ -148,6 +148,7 @@ class Loggerstash
         severity_name: s.downcase,
         hostname:      Socket.gethostname,
         pid:           $$,
+        thread_id:     Thread.current.object_id,
         caller:        {
           absolute_path: caller.absolute_path,
           base_label:    caller.base_label,
