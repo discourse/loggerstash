@@ -161,12 +161,13 @@ describe Loggerstash do
           progname:      "asdf",
           severity_name: "info",
           pid:           kind_of(Numeric),
+          thread_id:     kind_of(Numeric),
           hostname:      instance_of(String),
           caller:        {
             absolute_path: __FILE__,
             base_label:    "<top (required)>",
             label:         "block (3 levels) in <top (required)>",
-            lineno:        __LINE__ - 18,
+            lineno:        __LINE__ - 19,
             path:          __FILE__,
           },
         )
@@ -189,12 +190,13 @@ describe Loggerstash do
           message:       "ohai",
           severity_name: "info",
           pid:           kind_of(Numeric),
+          thread_id:     kind_of(Numeric),
           hostname:      instance_of(String),
           caller:        {
             absolute_path: __FILE__,
             base_label:    "<top (required)>",
             label:         "block (3 levels) in <top (required)>",
-            lineno:        __LINE__ - 17,
+            lineno:        __LINE__ - 18,
             path:          __FILE__,
           },
         )
