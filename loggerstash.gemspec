@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 begin
   require 'git-version-bump'
 rescue LoadError
@@ -27,7 +29,7 @@ Gem::Specification.new do |s|
 
   s.required_ruby_version = ">= 2.3.0"
 
-  s.add_runtime_dependency "logstash_writer", "~> 0.0"
+  s.add_runtime_dependency "logstash_writer", ">= 0.0.11"
 
   s.add_development_dependency 'bundler'
   s.add_development_dependency 'github-release'

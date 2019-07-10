@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative './spec_helper'
 require 'logger'
 
@@ -9,7 +11,7 @@ describe Loggerstash do
 
   before :each do
     allow(LogstashWriter).to receive(:new).and_return(mock_writer)
-    allow(mock_writer).to receive(:run)
+    allow(mock_writer).to receive(:start!)
     allow(mock_writer).to receive(:send_event)
   end
 
@@ -71,7 +73,7 @@ describe Loggerstash do
       ls.attach(klass)
 
       expect(LogstashWriter).to have_received(:new).with(server_name: "192.0.2.42:5151")
-      expect(mock_writer).to have_received(:run)
+      expect(mock_writer).to have_received(:start!)
     end
 
     it "starts the logstash writer only once" do
@@ -82,7 +84,7 @@ describe Loggerstash do
       ls.attach(k2)
 
       expect(LogstashWriter).to have_received(:new).with(server_name: "192.0.2.42:5151").exactly(:once)
-      expect(mock_writer).to have_received(:run).exactly(:once)
+      expect(mock_writer).to have_received(:start!).exactly(:once)
     end
   end
 
@@ -130,15 +132,10 @@ describe Loggerstash do
       expect(mock_writer).to have_received(:send_event).with(m: "utf")
     end
 
-    it "updates the formatter while running" do
-      l = Logger.new("/dev/null")
-      ls.attach(l)
+    it "raises an exception if called after attachment" do
+      ls.attach(Class.new)
 
-      ls.formatter = ->(s, t, p, m) { { m: "utfwr" } }
-
-      l.info("asdf") { "ohai" }
-
-      expect(mock_writer).to have_received(:send_event).with(m: "utfwr")
+      expect { ls.formatter = ->(s, t, p, m) { { m: "utfwr" } } }.to raise_error(Loggerstash::AlreadyRunningError)
     end
   end
 
@@ -211,5 +208,19 @@ describe Loggerstash do
 
       expect(sio.string).to match(/asdf.*ohai/)
     end
+
+   context "when attached to a class" do
+     let(:klass) { Class.new(Logger) }
+
+     it "finds the writer and writes to it" do
+       ls.attach(klass)
+
+       l = klass.new("/dev/null")
+
+       l.info("ohai!")
+
+       expect(mock_writer).to have_received(:send_event)
+     end
+   end
   end
 end
