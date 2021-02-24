@@ -154,18 +154,28 @@ describe Loggerstash do
           "@metadata":   {
             event_type: "loggerstash",
           },
+          log: {
+            level: "info",
+            logger: "Loggerstash",
+            origin: {
+              base_function: "<top (required)>",
+              file: {
+                line: __LINE__ - 15,
+                name: __FILE__,
+              },
+              function: "block (3 levels) in <top (required)>",
+            },
+          },
+          host: {
+            hostname: instance_of(String),
+          },
           message:       "ohai",
-          progname:      "asdf",
-          severity_name: "info",
-          pid:           kind_of(Numeric),
-          thread_id:     kind_of(Numeric),
-          hostname:      instance_of(String),
-          caller:        {
-            absolute_path: __FILE__,
-            base_label:    "<top (required)>",
-            label:         "block (3 levels) in <top (required)>",
-            lineno:        __LINE__ - 19,
-            path:          __FILE__,
+          process: {
+            name: "asdf",
+            pid: kind_of(Numeric),
+            thread: {
+              id: kind_of(Numeric),
+            },
           },
         )
     end
@@ -184,17 +194,27 @@ describe Loggerstash do
           "@metadata":   {
             event_type: "loggerstash",
           },
+          log: {
+            level: "info",
+            logger: "Loggerstash",
+            origin: {
+              base_function: "<top (required)>",
+              file: {
+                line: __LINE__ - 15,
+                name: __FILE__,
+              },
+              function: "block (3 levels) in <top (required)>",
+            },
+          },
+          host: {
+            hostname: instance_of(String),
+          },
           message:       "ohai",
-          severity_name: "info",
-          pid:           kind_of(Numeric),
-          thread_id:     kind_of(Numeric),
-          hostname:      instance_of(String),
-          caller:        {
-            absolute_path: __FILE__,
-            base_label:    "<top (required)>",
-            label:         "block (3 levels) in <top (required)>",
-            lineno:        __LINE__ - 18,
-            path:          __FILE__,
+          process: {
+            pid: kind_of(Numeric),
+            thread: {
+              id: kind_of(Numeric),
+            },
           },
         )
     end

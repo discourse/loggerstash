@@ -157,9 +157,9 @@ class Loggerstash
       end
     end
 
-    # Mangle the standard sev/time/prog/msg set into a logstash
-    # event.
+    # Mangle the standard sev/time/prog/msg set into a logstash event.
     #
+    # Caller information is a https://www.rubydoc.info/stdlib/core/Thread/Backtrace/Location
     def default_loggerstash_formatter
       ->(s, t, p, m) do
         caller = caller_locations.find { |loc| ! [__FILE__, logger_filename].include? loc.absolute_path }
@@ -168,20 +168,30 @@ class Loggerstash
           "@timestamp":  t.utc.strftime("%FT%T.%NZ"),
           "@metadata":   { event_type: "loggerstash" },
           message:       m,
-          severity_name: s.downcase,
-          hostname:      Socket.gethostname,
-          pid:           $$,
-          thread_id:     Thread.current.object_id,
-          caller:        {
-            absolute_path: caller.absolute_path,
-            base_label:    caller.base_label,
-            label:         caller.label,
-            lineno:        caller.lineno,
-            path:          caller.path,
+          log: {
+            level: s.downcase,
+            logger: "Loggerstash",
+            origin: {
+              base_function: caller.base_label, # not in ECS
+              file: {
+                line: caller.lineno,
+                name: caller.absolute_path,
+              },
+              function: caller.label,
+            },
+          },
+          host: {
+            hostname: Socket.gethostname,
+          },
+          process: {
+            pid: $$,
+            thread: {
+              id: Thread.current.object_id,
+            },
           },
         }.tap do |ev|
-          ev[:progname]    = p if p
-          ev[:thread_name] = Thread.current.name if Thread.current.name
+          ev[:process][:name] = p if p
+          ev[:process][:thread][:name] = Thread.current.name if Thread.current.name
         end
       end
     end
