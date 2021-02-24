@@ -5,6 +5,8 @@ on:
   push:
     branches:
       - master
+    tags:
+      - v*
 
 jobs:
   build:
@@ -31,3 +33,8 @@ jobs:
           bundle install --jobs 4
       - name: Tests
         run: bundle exec rake
+
+publish:
+  if: contains(github.ref, 'refs/tags/v')
+  needs: build
+  runs-on: ubuntu-latest
