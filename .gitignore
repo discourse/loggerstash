@@ -5,5 +5,7 @@ Gemfile.lock
 /coverage
 /.bundle
 /tmp
+/.ruby-gemset
+/.ruby-version
 
 .rubocop-https---raw-githubusercontent-com-discourse-discourse-master--rubocop-yml
