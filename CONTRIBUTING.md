@@ -1,5 +1,5 @@
 * If, heaven forbid, you find a security vulnerability, please e-mail
-  `matt.palmer@discourse.org`.
+  `security@discourse.org`.
 
 * If you have found a discrepancy in documented and observed behaviour, that
   is a bug.  Feel free to [report it as an

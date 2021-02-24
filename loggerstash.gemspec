@@ -21,8 +21,8 @@ Gem::Specification.new do |s|
     however the message would have been handled otherwise.
   EOF
 
-  s.authors  = ["Matt Palmer"]
-  s.email    = ["matt.palmer@discourse.org"]
+  s.authors  = ["Michael Brown"]
+  s.email    = ["michael.brown@discourse.org"]
   s.homepage = "https://github.com/discourse/loggerstash"
 
   s.files = `git ls-files -z`.split("\0").reject { |f| f =~ /^(G|spec|Rakefile)/ }
