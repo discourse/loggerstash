@@ -1,6 +1,7 @@
+---
 name: Loggerstash Tests
 
-on:
+"on":
   pull_request:
   push:
     branches:
@@ -33,7 +34,14 @@ jobs:
           bundle install --jobs 4
       - name: Tests
         run: bundle exec rake
+
   publish:
     if: contains(github.ref, 'refs/tags/v')
     needs: build
     runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Release Gem
+        uses: CvX/publish-rubygems-action@master
+        env:
+          RUBYGEMS_API_KEY: ${{secrets.RUBYGEMS_API_KEY}}
