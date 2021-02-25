@@ -8,6 +8,7 @@ task default: :doc_stats
 
 begin
   Bundler.setup(:default, :development)
+  Bundler::GemHelper.install_tasks
 rescue Bundler::BundlerError => e
   $stderr.puts e.message
   $stderr.puts "Run `bundle install` to install missing gems"
@@ -36,9 +37,4 @@ end
 require 'rspec/core/rake_task'
 RSpec::Core::RakeTask.new :test do |t|
   t.pattern = "spec/**/*_spec.rb"
-end
-
-Bundler::GemHelper.install_tasks
-task :release do
-  sh "git release"
 end

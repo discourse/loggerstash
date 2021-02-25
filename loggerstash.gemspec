@@ -1,17 +1,9 @@
 # frozen_string_literal: true
 
-begin
-  require 'git-version-bump'
-rescue LoadError
-  nil
-end
-
 Gem::Specification.new do |s|
   s.name = "loggerstash"
 
-  s.version = GVB.version rescue "0.0.0.1.NOGVB"
-  s.date    = GVB.date    rescue Time.now.strftime("%Y-%m-%d")
-
+  s.version = "1.0.1"
   s.platform = Gem::Platform::RUBY
 
   s.summary  = "Monkeypatch Logger to send log entries to logstash"
@@ -32,8 +24,6 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency "logstash_writer", ">= 0.0.11"
 
   s.add_development_dependency 'bundler'
-  s.add_development_dependency 'github-release'
-  s.add_development_dependency 'git-version-bump'
   s.add_development_dependency 'guard-rspec'
   s.add_development_dependency 'guard-rubocop'
   s.add_development_dependency 'rack-test'
