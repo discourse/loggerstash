@@ -167,6 +167,9 @@ class Loggerstash
         {
           "@timestamp":  t.utc.strftime("%FT%T.%NZ"),
           "@metadata":   { event_type: "loggerstash" },
+          ecs: {
+            version: "1.8"
+          },
           message:       m,
           log: {
             level: s.downcase,

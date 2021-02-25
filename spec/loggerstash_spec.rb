@@ -154,13 +154,16 @@ describe Loggerstash do
           "@metadata":   {
             event_type: "loggerstash",
           },
+          ecs: {
+            version: "1.8"
+          },
           log: {
             level: "info",
             logger: "Loggerstash",
             origin: {
               base_function: "<top (required)>",
               file: {
-                line: __LINE__ - 15,
+                line: __LINE__ - 18,
                 name: __FILE__,
               },
               function: "block (3 levels) in <top (required)>",
@@ -169,7 +172,7 @@ describe Loggerstash do
           host: {
             hostname: instance_of(String),
           },
-          message:       "ohai",
+          message: "ohai",
           process: {
             name: "asdf",
             pid: kind_of(Numeric),
@@ -194,13 +197,16 @@ describe Loggerstash do
           "@metadata":   {
             event_type: "loggerstash",
           },
+          ecs: {
+            version: "1.8"
+          },
           log: {
             level: "info",
             logger: "Loggerstash",
             origin: {
               base_function: "<top (required)>",
               file: {
-                line: __LINE__ - 15,
+                line: __LINE__ - 18,
                 name: __FILE__,
               },
               function: "block (3 levels) in <top (required)>",
@@ -209,7 +215,7 @@ describe Loggerstash do
           host: {
             hostname: instance_of(String),
           },
-          message:       "ohai",
+          message: "ohai",
           process: {
             pid: kind_of(Numeric),
             thread: {
