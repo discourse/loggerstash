@@ -3,7 +3,7 @@
 Gem::Specification.new do |s|
   s.name = "loggerstash"
 
-  s.version = "1.0.1"
+  s.version = "1.1.0"
   s.platform = Gem::Platform::RUBY
 
   s.summary  = "Monkeypatch Logger to send log entries to logstash"
