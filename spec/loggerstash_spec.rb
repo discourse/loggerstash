@@ -2,6 +2,7 @@
 
 require_relative './spec_helper'
 require 'logger'
+require 'tempfile'
 
 require 'loggerstash'
 
@@ -33,7 +34,7 @@ describe Loggerstash do
 
     it "accepts a formatter" do
       ls = Loggerstash.new(logstash_server: "speccy", formatter: ->(s, t, p, m) { { a: "a", b: "b" } })
-      l = Logger.new("/dev/null")
+      l = Logger.new(Tempfile.new)
       ls.attach(l)
 
       l.info("asdf") { "ohai" }
@@ -42,7 +43,7 @@ describe Loggerstash do
     end
 
     it "accepts a logger" do
-      ls = Loggerstash.new(logstash_server: "speccy", logger: logger = Logger.new("/dev/null"))
+      ls = Loggerstash.new(logstash_server: "speccy", logger: logger = Logger.new(Tempfile.new))
 
       ls.attach(logger)
 
@@ -124,7 +125,7 @@ describe Loggerstash do
   describe "#formatter=" do
     it "updates the formatter" do
       ls.formatter = ->(s, t, p, m) { { m: "utf" } }
-      l = Logger.new("/dev/null")
+      l = Logger.new(Tempfile.new)
       ls.attach(l)
 
       l.info("asdf") { "ohai" }
@@ -142,7 +143,7 @@ describe Loggerstash do
   describe "logging" do
     it "writes a log event" do
       allow(Time).to receive(:now).and_return(Time.strptime("1234567890.987654321Z", "%s.%N%Z"))
-      l = Logger.new("/dev/null")
+      l = Logger.new(Tempfile.new)
       ls.attach(l)
 
       l.info("asdf") { "ohai" }
@@ -185,7 +186,7 @@ describe Loggerstash do
 
     it "accepts a lack of progname" do
       allow(Time).to receive(:now).and_return(Time.strptime("1234567890.987654321Z", "%s.%N%Z"))
-      l = Logger.new("/dev/null")
+      l = Logger.new(Tempfile.new)
       ls.attach(l)
 
       l.info("ohai")
@@ -241,7 +242,7 @@ describe Loggerstash do
      it "finds the writer and writes to it" do
        ls.attach(klass)
 
-       l = klass.new("/dev/null")
+       l = klass.new(Tempfile.new)
 
        l.info("ohai!")
 
