@@ -27,7 +27,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'guard-rspec'
   s.add_development_dependency 'guard-rubocop'
   s.add_development_dependency 'rack-test'
-  s.add_development_dependency 'rake', "~> 12.0"
+  s.add_development_dependency 'rake', "~> 13.0"
   s.add_development_dependency 'redcarpet'
   s.add_development_dependency 'rspec'
   s.add_development_dependency 'rubocop'
