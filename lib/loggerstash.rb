@@ -165,12 +165,12 @@ class Loggerstash
         caller = caller_locations.find { |loc| ! [__FILE__, logger_filename].include? loc.absolute_path }
 
         {
-          "@timestamp":  t.utc.strftime("%FT%T.%NZ"),
-          "@metadata":   { event_type: "loggerstash" },
+          "@timestamp": t.utc.strftime("%FT%T.%NZ"),
+          "@metadata": { event_type: "loggerstash" },
           ecs: {
             version: "1.8"
           },
-          message:       m,
+          message: m,
           log: {
             level: s.downcase,
             logger: "Loggerstash",

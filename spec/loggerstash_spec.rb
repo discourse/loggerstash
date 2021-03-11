@@ -151,8 +151,8 @@ describe Loggerstash do
       expect(mock_writer)
         .to have_received(:send_event)
         .with(
-          "@timestamp":  "2009-02-13T23:31:30.987654321Z",
-          "@metadata":   {
+          "@timestamp": "2009-02-13T23:31:30.987654321Z",
+          "@metadata": {
             event_type: "loggerstash",
           },
           ecs: {
@@ -194,8 +194,8 @@ describe Loggerstash do
       expect(mock_writer)
         .to have_received(:send_event)
         .with(
-          "@timestamp":  "2009-02-13T23:31:30.987654321Z",
-          "@metadata":   {
+          "@timestamp": "2009-02-13T23:31:30.987654321Z",
+          "@metadata": {
             event_type: "loggerstash",
           },
           ecs: {

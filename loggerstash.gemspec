@@ -19,7 +19,7 @@ Gem::Specification.new do |s|
 
   s.files = `git ls-files -z`.split("\0").reject { |f| f =~ /^(G|spec|Rakefile)/ }
 
-  s.required_ruby_version = ">= 2.4.0"
+  s.required_ruby_version = ">= 2.5.0"
 
   s.add_runtime_dependency "logstash_writer", ">= 0.0.11"
 
@@ -27,10 +27,9 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'guard-rspec'
   s.add_development_dependency 'guard-rubocop'
   s.add_development_dependency 'rack-test'
-  s.add_development_dependency 'rake', "~> 12.0"
+  s.add_development_dependency 'rake', "~> 13.0"
   s.add_development_dependency 'redcarpet'
   s.add_development_dependency 'rspec'
-  s.add_development_dependency 'rubocop'
   s.add_development_dependency 'rubocop-discourse'
   s.add_development_dependency 'simplecov'
   s.add_development_dependency 'yard'
